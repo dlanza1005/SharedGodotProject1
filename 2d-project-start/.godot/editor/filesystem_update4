@@ -1,0 +1,10 @@
+res://survivors_game.tscn
+res://bullet.gd
+res://gun.gd
+res://mob.gd
+res://player.gd
+res://characters/slime/slime.gd
+res://survivors_game.gd
+res://player.tscn
+res://gun.tscn
+res://pinetree.tscn
