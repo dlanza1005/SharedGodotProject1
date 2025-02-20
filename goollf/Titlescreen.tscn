@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://ds5dmbowi0lgf"]
+
+[ext_resource type="Script" path="res://titlescreen.gd" id="1_hjp8k"]
+[ext_resource type="Texture2D" uid="uid://da7ll2mxfqmw5" path="res://goollf2.png" id="1_n3xju"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_hjp8k")
+
+[node name="Goollf2" type="Sprite2D" parent="."]
+position = Vector2(576, 458)
+scale = Vector2(1.14286, 1.14286)
+texture = ExtResource("1_n3xju")
+
+[node name="Label" type="Label" parent="Goollf2"]
+offset_left = 35.0
+offset_top = -361.375
+offset_right = 203.0
+offset_bottom = -338.375
+text = "PLACEHOLDER IMAGE"
+metadata/_edit_use_anchors_ = true
