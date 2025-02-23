@@ -36,9 +36,16 @@ region = Rect2(512, 512, 256, 256)
 
 [node name="GravityGolf" type="Node2D"]
 
+[node name="Aimer" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(212, 447)
+texture = ExtResource("1_52lu5")
+
 [node name="Ball" type="RigidBody2D" parent="."]
 position = Vector2(212, 447)
 gravity_scale = 0.0
+contact_monitor = true
+max_contacts_reported = 8
 script = ExtResource("1_xw1sa")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ball"]
@@ -76,3 +83,5 @@ shape = SubResource("CircleShape2D_y8t33")
 
 [node name="Sprite2D" type="Sprite2D" parent="Planet3"]
 texture = SubResource("AtlasTexture_unx27")
+
+[connection signal="body_entered" from="Ball" to="Ball" method="_on_body_entered"]
