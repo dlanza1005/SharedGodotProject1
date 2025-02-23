@@ -16,7 +16,7 @@ var state_stack: Array[Node] = []
 var current_state: Node = null
 
 func _ready():
-	push_state("res://TitleScreen.tscn")
+	push_state("res://Scenes/General/TitleScreen.tscn")
 
 func push_state(scene_path: String):
 	var scene = load(scene_path).instantiate()

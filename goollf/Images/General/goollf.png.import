@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dyy8k31gxbpij"
-path="res://.godot/imported/goollf original.png-60a9ec6e6ce4b69f28a02acd3a613f4a.ctex"
+uid="uid://rx8kqolixem5"
+path="res://.godot/imported/goollf.png-28ad27e09e297c7466f9a5629549260f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://goollf original.png"
-dest_files=["res://.godot/imported/goollf original.png-60a9ec6e6ce4b69f28a02acd3a613f4a.ctex"]
+source_file="res://Images/General/goollf.png"
+dest_files=["res://.godot/imported/goollf.png-28ad27e09e297c7466f9a5629549260f.ctex"]
 
 [params]
 
