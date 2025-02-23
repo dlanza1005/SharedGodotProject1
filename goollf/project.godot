@@ -15,6 +15,10 @@ run/main_scene="res://Scenes/General/GameManagerScene.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://Images/General/icon.svg"
 
+[autoload]
+
+PlanetTracker="*res://Scripts/PlanetTracker.gd"
+
 [dotnet]
 
 project/assembly_name="GOOLLF"

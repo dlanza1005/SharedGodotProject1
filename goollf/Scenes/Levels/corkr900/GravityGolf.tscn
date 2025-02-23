@@ -1,0 +1,78 @@
+[gd_scene load_steps=14 format=3 uid="uid://biiaila5asspn"]
+
+[ext_resource type="Texture2D" uid="uid://b5ns0b8yy6dga" path="res://Images/Sprites/Balls/SuspiciouslyRoundAsteroid.png" id="1_52lu5"]
+[ext_resource type="Texture2D" uid="uid://bkp4m8r451dsu" path="res://Images/Sprites/Planet/Planet4_128.png" id="1_qg7k5"]
+[ext_resource type="Script" path="res://Scenes/Levels/corkr900/Ball.gd" id="1_xw1sa"]
+[ext_resource type="Texture2D" uid="uid://olefk33yy1hd" path="res://Images/Sprites/Planet/Planet2_320.png" id="1_yhpxq"]
+[ext_resource type="Texture2D" uid="uid://crp6k1ty386dh" path="res://Images/Sprites/Planet/Planet3_256.png" id="3_5hcjs"]
+[ext_resource type="Script" path="res://Scenes/Levels/corkr900/Planet.gd" id="3_kvqjq"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_d5j2l"]
+radius = 16.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6wc1t"]
+radius = 160.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cblqc"]
+resource_local_to_scene = true
+atlas = ExtResource("1_yhpxq")
+region = Rect2(0, 320, 320, 320)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_x7e8n"]
+radius = 64.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xu76p"]
+resource_local_to_scene = true
+atlas = ExtResource("1_qg7k5")
+region = Rect2(512, 512, 128, 128)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_y8t33"]
+radius = 128.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_unx27"]
+resource_local_to_scene = true
+atlas = ExtResource("3_5hcjs")
+region = Rect2(512, 512, 256, 256)
+
+[node name="GravityGolf" type="Node2D"]
+
+[node name="Ball" type="RigidBody2D" parent="."]
+position = Vector2(212, 447)
+gravity_scale = 0.0
+script = ExtResource("1_xw1sa")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ball"]
+shape = SubResource("CircleShape2D_d5j2l")
+
+[node name="Sprite2D" type="Sprite2D" parent="Ball"]
+texture = ExtResource("1_52lu5")
+
+[node name="Planet1" type="StaticBody2D" parent="."]
+position = Vector2(488, 272)
+script = ExtResource("3_kvqjq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Planet1"]
+shape = SubResource("CircleShape2D_6wc1t")
+
+[node name="Sprite2D" type="Sprite2D" parent="Planet1"]
+texture = SubResource("AtlasTexture_cblqc")
+
+[node name="Planet2" type="StaticBody2D" parent="."]
+position = Vector2(175, 520)
+script = ExtResource("3_kvqjq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Planet2"]
+shape = SubResource("CircleShape2D_x7e8n")
+
+[node name="Sprite2D" type="Sprite2D" parent="Planet2"]
+texture = SubResource("AtlasTexture_xu76p")
+
+[node name="Planet3" type="StaticBody2D" parent="."]
+position = Vector2(971, 366)
+script = ExtResource("3_kvqjq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Planet3"]
+shape = SubResource("CircleShape2D_y8t33")
+
+[node name="Sprite2D" type="Sprite2D" parent="Planet3"]
+texture = SubResource("AtlasTexture_unx27")
