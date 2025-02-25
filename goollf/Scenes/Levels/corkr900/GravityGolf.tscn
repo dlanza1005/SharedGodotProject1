@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://biiaila5asspn"]
+[gd_scene load_steps=19 format=3 uid="uid://biiaila5asspn"]
 
 [ext_resource type="Texture2D" uid="uid://b5ns0b8yy6dga" path="res://Images/Sprites/Balls/SuspiciouslyRoundAsteroid.png" id="1_52lu5"]
 [ext_resource type="Texture2D" uid="uid://bkp4m8r451dsu" path="res://Images/Sprites/Planet/Planet4_128.png" id="1_qg7k5"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://crp6k1ty386dh" path="res://Images/Sprites/Planet/Planet3_256.png" id="3_5hcjs"]
 [ext_resource type="Script" path="res://Scenes/Levels/corkr900/Planet.gd" id="3_kvqjq"]
 [ext_resource type="Script" path="res://Scripts/FollowCam2D.gd" id="3_r1c22"]
+[ext_resource type="Texture2D" uid="uid://c3nukor3njm3e" path="res://Images/Sprites/Misc/Flag_Red.png" id="8_sj1ha"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_d5j2l"]
 radius = 16.0
@@ -69,11 +70,12 @@ shape = SubResource("CircleShape2D_d5j2l")
 texture = ExtResource("1_52lu5")
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("follow_node")]
+position_smoothing_speed = 500.0
 script = ExtResource("3_r1c22")
 follow_node = NodePath("../Ball")
 
 [node name="Planet1" type="StaticBody2D" parent="."]
-position = Vector2(450, 240)
+position = Vector2(430, 142)
 script = ExtResource("3_kvqjq")
 mass = 4000
 
@@ -94,7 +96,7 @@ shape = SubResource("CircleShape2D_x7e8n")
 texture = SubResource("AtlasTexture_xu76p")
 
 [node name="Planet3" type="StaticBody2D" parent="."]
-position = Vector2(971, 366)
+position = Vector2(1369, 322)
 script = ExtResource("3_kvqjq")
 mass = 2000
 
@@ -105,7 +107,7 @@ shape = SubResource("CircleShape2D_y8t33")
 texture = SubResource("AtlasTexture_unx27")
 
 [node name="Planet4" type="StaticBody2D" parent="."]
-position = Vector2(601, 576)
+position = Vector2(785, 506)
 script = ExtResource("3_kvqjq")
 mass = 2000
 
@@ -114,5 +116,12 @@ shape = SubResource("CircleShape2D_pkjy4")
 
 [node name="Sprite2D" type="Sprite2D" parent="Planet4"]
 texture = SubResource("AtlasTexture_ghctu")
+
+[node name="Flag" type="Sprite2D" parent="."]
+position = Vector2(1484, 265)
+rotation = 1.1205
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("8_sj1ha")
+offset = Vector2(0, -114)
 
 [connection signal="body_entered" from="Ball" to="Ball" method="_on_body_entered"]
