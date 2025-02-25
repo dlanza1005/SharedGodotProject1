@@ -62,6 +62,7 @@ func shoot(vel: Vector2):
 	set_deferred("freeze", false)
 	get_parent().get_node("Aimer").set_visible(false)
 	set_deferred("linear_velocity", vel)
+	set_deferred("angular_velocity", randf_range(-20, 20))
 
 func handleAim():
 	var aimer = get_parent().get_node("Aimer")
