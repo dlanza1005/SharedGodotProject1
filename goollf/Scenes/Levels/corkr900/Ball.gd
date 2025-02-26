@@ -1,14 +1,14 @@
 extends RigidBody2D
 
-var gravityMultiplier = 30000
-var aimMultiplier = 120
-var resistance = 0.4
-var aiming = true
-var maxAimDistance = 150
-var stopBouncingThreshold = 5
-var angularVelocityMulOnBounce = 0.6
+var gravityMultiplier: float = 30000
+var aimMultiplier: float = 120
+var resistance: float = 0.4
+var aiming: bool = true
+var maxAimDistance: float = 150
+var stopBouncingThreshold: float = 5
+var angularVelocityMulOnBounce: float = 0.6
 
-func _process(_delta):
+func _process(_delta) -> void:
 	if aiming:
 		constant_force = Vector2(0, 0)
 		handleAim()
@@ -17,7 +17,7 @@ func _process(_delta):
 		force += drag()
 		constant_force = force
 
-func calcForce():
+func calcForce() -> Vector2:
 	if (aiming):
 		return Vector2(0, 0)
 	var sum = Vector2(0, 0)
@@ -29,10 +29,10 @@ func calcForce():
 		sum += force
 	return sum
 
-func drag():
+func drag() -> Vector2:
 	return -linear_velocity * resistance
 
-func _input(event):
+func _input(event) -> void:
 	if !aiming:
 		return
 	if event is InputEventMouseButton:
@@ -49,7 +49,7 @@ func _on_body_entered(body: Node) -> void:
 	else:
 		angular_velocity *= angularVelocityMulOnBounce
 
-func beginAim():
+func beginAim() -> void:
 	aiming = true
 	set_deferred("freeze", true)
 	linear_velocity = Vector2(0,0)
@@ -57,14 +57,14 @@ func beginAim():
 	rotation_degrees = 0
 	get_parent().get_node("Aimer").set_visible(true)
 
-func shoot(vel: Vector2):
+func shoot(vel: Vector2) -> void:
 	aiming = false
 	set_deferred("freeze", false)
 	get_parent().get_node("Aimer").set_visible(false)
 	set_deferred("linear_velocity", vel)
 	set_deferred("angular_velocity", randf_range(-20, 20))
 
-func handleAim():
+func handleAim() -> void:
 	var aimer = get_parent().get_node("Aimer")
 	var mouseposition = get_local_mouse_position() + position
 	var offset = (mouseposition - position).limit_length(maxAimDistance)

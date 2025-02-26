@@ -17,6 +17,7 @@ config/icon="res://Images/General/icon.svg"
 
 [autoload]
 
+GameState="*res://Scripts/GameState.gd"
 PlanetTracker="*res://Scripts/PlanetTracker.gd"
 
 [display]

@@ -54,6 +54,8 @@ radius = 70.0
 [node name="GravityGolf" type="Node2D"]
 script = ExtResource("1_3ba4d")
 
+[node name="LevelController" type="Node2D" parent="."]
+
 [node name="Aimer" type="Sprite2D" parent="."]
 position = Vector2(212, 447)
 texture = ExtResource("1_52lu5")
