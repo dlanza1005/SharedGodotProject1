@@ -1,0 +1,144 @@
+[gd_scene load_steps=12 format=3 uid="uid://cd1k2tf27cldt"]
+
+[ext_resource type="Script" path="res://Scenes/Levels/MuggleDave23/object_golf.gd" id="1_n2lxb"]
+[ext_resource type="Script" path="res://Scenes/Levels/MuggleDave23/cue.gd" id="2_3r0ma"]
+[ext_resource type="Script" path="res://Scenes/Levels/MuggleDave23/hole.gd" id="3_38y2e"]
+[ext_resource type="Texture2D" uid="uid://ldwdbe0o6py2" path="res://Images/Sprites/Balls/golfball.png" id="3_an7u4"]
+[ext_resource type="Texture2D" uid="uid://dq2ymvnsqbog3" path="res://Images/Sprites/Holes/hole.png" id="5_uqre7"]
+
+[sub_resource type="Gradient" id="Gradient_tl4hq"]
+colors = PackedColorArray(0.184156, 0.0871832, 0.00367153, 1, 0.301749, 0.229987, 0.149016, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_avkq5"]
+gradient = SubResource("Gradient_tl4hq")
+fill_to = Vector2(0, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rwbte"]
+radius = 6.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lncxw"]
+radius = 14.0
+
+[sub_resource type="Gradient" id="Gradient_4gd7v"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_hso24"]
+gradient = SubResource("Gradient_4gd7v")
+
+[node name="GameLevel" type="Node2D"]
+script = ExtResource("1_n2lxb")
+
+[node name="Table" type="Node2D" parent="."]
+position = Vector2(202, 344)
+
+[node name="Cue" type="Node2D" parent="Table"]
+script = ExtResource("2_3r0ma")
+
+[node name="Sprite2D" type="Sprite2D" parent="Table/Cue"]
+position = Vector2(-103, -8.58307e-06)
+scale = Vector2(2.40625, 0.15625)
+texture = SubResource("GradientTexture2D_avkq5")
+
+[node name="Objects" type="Node2D" parent="Table"]
+
+[node name="Ball" type="RigidBody2D" parent="Table/Objects" groups=["Ball"]]
+position = Vector2(9.53674e-07, 0)
+gravity_scale = 0.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Table/Objects/Ball"]
+position = Vector2(8.70228e-06, -8.58307e-06)
+scale = Vector2(0.06, 0.0600002)
+texture = ExtResource("3_an7u4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Table/Objects/Ball"]
+position = Vector2(3.8743e-07, 0)
+shape = SubResource("CircleShape2D_rwbte")
+
+[node name="Hole" type="Area2D" parent="."]
+script = ExtResource("3_38y2e")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hole"]
+position = Vector2(569.625, 343)
+shape = SubResource("CircleShape2D_lncxw")
+
+[node name="Sprite2D" type="Sprite2D" parent="Hole"]
+position = Vector2(569.625, 313)
+scale = Vector2(0.6525, 0.6525)
+texture = ExtResource("5_uqre7")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+grow_horizontal = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -423.0
+offset_bottom = 140.0
+grow_horizontal = 0
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+
+[node name="Panel" type="Panel" parent="UI/Control/MarginContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/Control/MarginContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="GridContainer" type="GridContainer" parent="UI/Control/MarginContainer/Panel/MarginContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 0
+columns = 4
+
+[node name="TextureRect" type="TextureRect" parent="UI/Control/MarginContainer/Panel/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = SubResource("GradientTexture2D_hso24")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TextureRect2" type="TextureRect" parent="UI/Control/MarginContainer/Panel/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = SubResource("GradientTexture2D_hso24")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TextureRect3" type="TextureRect" parent="UI/Control/MarginContainer/Panel/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = SubResource("GradientTexture2D_hso24")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TextureRect4" type="TextureRect" parent="UI/Control/MarginContainer/Panel/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = SubResource("GradientTexture2D_hso24")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="UI"]
+offset_left = 10.0
+offset_top = 13.0
+offset_right = 216.0
+offset_bottom = 24.0
+
+[connection signal="body_entered" from="Hole" to="." method="_on_hole_body_entered"]
