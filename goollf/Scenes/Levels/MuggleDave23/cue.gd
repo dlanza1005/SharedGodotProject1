@@ -8,6 +8,7 @@ extends Node2D
 var pullback_distance := 0.0
 var charging := false
 var aiming := true  # True when adjusting angle, false during animation
+#var cue_angle := 0.0  # angle of the cue
 
 func _process(delta):
 	if aiming:
@@ -15,7 +16,7 @@ func _process(delta):
 
 	if charging:
 		pullback_distance = min(pullback_distance + charge_speed * delta, max_pullback)
-		position = Vector2(-pullback_distance, 0)  # Move cue back
+		position = Vector2(-pullback_distance * cos(rotation), -pullback_distance * sin(rotation))  # Move cue back
 
 func _input(event):
 	if event is InputEventMouseButton:
