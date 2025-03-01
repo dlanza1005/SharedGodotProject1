@@ -17,6 +17,8 @@ config/icon="res://Images/General/icon.svg"
 
 [autoload]
 
+LoadSave="*res://Scripts/LoadSave.gd"
+SaveFile="*res://Scripts/SaveFile.gd"
 GameState="*res://Scripts/GameState.gd"
 PlanetTracker="*res://Scripts/PlanetTracker.gd"
 

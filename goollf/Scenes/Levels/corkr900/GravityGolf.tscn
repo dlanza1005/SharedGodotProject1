@@ -1,14 +1,15 @@
-[gd_scene load_steps=21 format=3 uid="uid://biiaila5asspn"]
+[gd_scene load_steps=22 format=3 uid="uid://biiaila5asspn"]
 
 [ext_resource type="Script" path="res://Scripts/LevelController.gd" id="1_3ba4d"]
 [ext_resource type="Texture2D" uid="uid://b5ns0b8yy6dga" path="res://Images/Sprites/Balls/SuspiciouslyRoundAsteroid.png" id="1_52lu5"]
 [ext_resource type="Texture2D" uid="uid://bkp4m8r451dsu" path="res://Images/Sprites/Planet/Planet4_128.png" id="1_qg7k5"]
-[ext_resource type="Script" path="res://Scenes/Levels/corkr900/Ball.gd" id="1_xw1sa"]
+[ext_resource type="Script" path="res://Scenes/Levels/corkr900/GravityGolfBall.gd" id="1_xw1sa"]
 [ext_resource type="Texture2D" uid="uid://olefk33yy1hd" path="res://Images/Sprites/Planet/Planet2_320.png" id="1_yhpxq"]
 [ext_resource type="Texture2D" uid="uid://crp6k1ty386dh" path="res://Images/Sprites/Planet/Planet3_256.png" id="3_5hcjs"]
 [ext_resource type="Script" path="res://Scenes/Levels/corkr900/Planet.gd" id="3_kvqjq"]
 [ext_resource type="Script" path="res://Scripts/FollowCam2D.gd" id="3_r1c22"]
 [ext_resource type="Texture2D" uid="uid://c3nukor3njm3e" path="res://Images/Sprites/Misc/Flag_Red.png" id="8_sj1ha"]
+[ext_resource type="Script" path="res://Scenes/Levels/corkr900/GravityGolfFlag.gd" id="10_6sxqm"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_d5j2l"]
 radius = 16.0
@@ -129,6 +130,7 @@ rotation = 1.1205
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("8_sj1ha")
 offset = Vector2(0, -114)
+script = ExtResource("10_6sxqm")
 
 [node name="Area2D" type="Area2D" parent="Flag"]
 
@@ -136,3 +138,4 @@ offset = Vector2(0, -114)
 shape = SubResource("CircleShape2D_eujx5")
 
 [connection signal="body_entered" from="Ball" to="Ball" method="_on_body_entered"]
+[connection signal="body_entered" from="Flag/Area2D" to="Flag" method="_on_area_2d_body_entered"]

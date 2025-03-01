@@ -1,10 +1,12 @@
 extends Node
 
+## Enumerates the possible level states
 enum LevelState {
 	Initial = 0,
 	LevelIntro = 1,
 	Active = 2,
 	LevelComplete = 3,
+	Unloading = 4
 }
 
 ## Internal. Do not reference directly from other scripts.
@@ -20,7 +22,7 @@ func begin_level(controller: LevelController) -> void:
 		_level_controller.level_info_dialog.visibility_changed.connect(_on_level_info_visibility_changed)
 	else:
 		_set_level_state(LevelState.Active)
-	_level_controller.level_begin.emit()
+	_level_controller.fire_level_begin()
 
 ## Call this to notify the controller that the level is completed
 func level_completed() -> void:
@@ -68,13 +70,16 @@ func _set_level_state(new_state: LevelState) -> void:
 		return
 	if _level_state == LevelState.LevelIntro:
 		# Exited level intro
-		_level_controller.level_info_dialog.set_visible(false)
+		if _level_controller.level_info_dialog != null:
+			_level_controller.level_info_dialog.set_visible(false)
 	if new_state == LevelState.Active:
-		_level_controller.level_active.emit()
+		_level_controller.fire_level_active()
 	if new_state == LevelState.LevelComplete:
-		_level_controller.level_complete_dialog.set_visible(true)
+		if _level_controller.level_complete_dialog != null:
+			_level_controller.level_complete_dialog.set_visible(true)
 		tree.paused = _level_controller.pause_on_level_complete
-		_level_controller.level_complete.emit()
-		# TODO save data
+		_level_controller.fire_level_complete()
+		# TODO mark level complete in save data
+		SaveFile.save_current()
 	_level_state = new_state
-	# TODO call _level_controller.evel_unload.emit() somewhere
+	# TODO call _level_controller.fire_level_unload() somewhere

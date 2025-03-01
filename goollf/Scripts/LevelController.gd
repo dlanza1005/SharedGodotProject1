@@ -17,3 +17,15 @@ signal level_unload
 
 func _ready() -> void:
 	GameState.begin_level(self)
+
+func fire_level_begin():
+	level_begin.emit()
+
+func fire_level_active():
+	level_active.emit()
+
+func fire_level_complete():
+	level_complete.emit()
+
+func fire_level_unload():
+	level_unload.emit()

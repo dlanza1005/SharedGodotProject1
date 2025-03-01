@@ -1,4 +1,5 @@
 extends RigidBody2D
+class_name GravityGolfBall
 
 var gravityMultiplier: float = 30000
 var aimMultiplier: float = 120
