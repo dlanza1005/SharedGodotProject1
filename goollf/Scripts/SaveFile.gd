@@ -43,7 +43,7 @@ func create_new() -> int:
 
 func load_slot(slot_to_load: int) -> bool:
 	var data = LoadSave.load(slot_to_load)
-	if data["failed_to_load"] == true:
+	if data.has("failed_to_load"):
 		return false
 	slot = slot_to_load
 	_apply_data(data)

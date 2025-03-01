@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://biiaila5asspn"]
+[gd_scene load_steps=26 format=3 uid="uid://biiaila5asspn"]
 
 [ext_resource type="Script" path="res://Scripts/LevelController.gd" id="1_3ba4d"]
 [ext_resource type="Texture2D" uid="uid://b5ns0b8yy6dga" path="res://Images/Sprites/Balls/SuspiciouslyRoundAsteroid.png" id="1_52lu5"]
@@ -10,6 +10,10 @@
 [ext_resource type="Script" path="res://Scripts/FollowCam2D.gd" id="3_r1c22"]
 [ext_resource type="Texture2D" uid="uid://c3nukor3njm3e" path="res://Images/Sprites/Misc/Flag_Red.png" id="8_sj1ha"]
 [ext_resource type="Script" path="res://Scenes/Levels/corkr900/GravityGolfFlag.gd" id="10_6sxqm"]
+[ext_resource type="Theme" uid="uid://5i55sugc47mo" path="res://Themes/default_ui_theme.tres" id="11_slmqg"]
+[ext_resource type="Script" path="res://Scenes/Levels/corkr900/LevelInfo.gd" id="12_64or1"]
+[ext_resource type="Script" path="res://Scenes/Levels/corkr900/LevelComplete.gd" id="13_syqnb"]
+[ext_resource type="Texture2D" uid="uid://b02sr388mwi0b" path="res://Images/Sprites/Background/Starry.png" id="14_xfkj2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_d5j2l"]
 radius = 16.0
@@ -52,10 +56,13 @@ region = Rect2(1024, 1024, 256, 256)
 [sub_resource type="CircleShape2D" id="CircleShape2D_eujx5"]
 radius = 70.0
 
-[node name="GravityGolf" type="Node2D"]
+[node name="GravityGolf" type="Node2D" node_paths=PackedStringArray("level_info_dialog", "level_complete_dialog")]
 script = ExtResource("1_3ba4d")
+level_info_dialog = NodePath("CanvasLayer/LevelInfoUI")
+level_complete_dialog = NodePath("CanvasLayer/LevelCompleteUI")
 
 [node name="Aimer" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(212, 447)
 texture = ExtResource("1_52lu5")
 
@@ -76,6 +83,7 @@ shape = SubResource("CircleShape2D_d5j2l")
 texture = ExtResource("1_52lu5")
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("follow_node")]
+position = Vector2(180, 442)
 position_smoothing_speed = 500.0
 script = ExtResource("3_r1c22")
 follow_node = NodePath("../Ball")
@@ -137,5 +145,128 @@ script = ExtResource("10_6sxqm")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Flag/Area2D"]
 shape = SubResource("CircleShape2D_eujx5")
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="LevelInfoUI" type="PanelContainer" parent="CanvasLayer"]
+custom_minimum_size = Vector2(500, 350)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -175.0
+offset_right = 250.0
+offset_bottom = 175.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("11_slmqg")
+script = ExtResource("12_64or1")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/LevelInfoUI"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/LevelInfoUI/MarginContainer"]
+layout_mode = 2
+
+[node name="Header" type="RichTextLabel" parent="CanvasLayer/LevelInfoUI/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"HeaderLarge"
+bbcode_enabled = true
+text = "[center]Gravity Golf"
+fit_content = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/LevelInfoUI/MarginContainer/VBoxContainer"]
+layout_mode = 2
+bbcode_enabled = true
+text = "[center]Get the ball to the flag!"
+fit_content = true
+shortcut_keys_enabled = false
+
+[node name="Buttons" type="HBoxContainer" parent="CanvasLayer/LevelInfoUI/MarginContainer"]
+layout_direction = 2
+layout_mode = 2
+size_flags_vertical = 8
+alignment = 1
+
+[node name="Button" type="Button" parent="CanvasLayer/LevelInfoUI/MarginContainer/Buttons"]
+custom_minimum_size = Vector2(120, 32)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+text = "Begin!"
+
+[node name="LevelCompleteUI" type="PanelContainer" parent="CanvasLayer"]
+visible = false
+custom_minimum_size = Vector2(500, 350)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -175.0
+offset_right = 250.0
+offset_bottom = 175.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("11_slmqg")
+script = ExtResource("13_syqnb")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/LevelCompleteUI"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/LevelCompleteUI/MarginContainer"]
+layout_mode = 2
+
+[node name="Header" type="RichTextLabel" parent="CanvasLayer/LevelCompleteUI/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"HeaderLarge"
+bbcode_enabled = true
+text = "[center]Level complete!"
+fit_content = true
+autowrap_mode = 0
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="CanvasLayer/LevelCompleteUI/MarginContainer/VBoxContainer"]
+layout_mode = 2
+bbcode_enabled = true
+text = "[center]This will eventually display data about your score or whatever."
+fit_content = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/LevelCompleteUI/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="Button" type="Button" parent="CanvasLayer/LevelCompleteUI/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+text = "Continue"
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+follow_viewport_enabled = true
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(-0.35, -0.35)
+motion_mirroring = Vector2(2048, 1536)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+texture = ExtResource("14_xfkj2")
+
+[node name="Sprite2D2" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(4096, 0)
+texture = ExtResource("14_xfkj2")
+
+[node name="Sprite2D3" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(0, 3072)
+texture = ExtResource("14_xfkj2")
+
+[node name="Sprite2D4" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(4096, 3072)
+texture = ExtResource("14_xfkj2")
+
+[connection signal="level_active" from="." to="Ball" method="_on_gravity_golf_level_active"]
 [connection signal="body_entered" from="Ball" to="Ball" method="_on_body_entered"]
 [connection signal="body_entered" from="Flag/Area2D" to="Flag" method="_on_area_2d_body_entered"]
+[connection signal="pressed" from="CanvasLayer/LevelInfoUI/MarginContainer/Buttons/Button" to="CanvasLayer/LevelInfoUI" method="_on_begin_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/LevelCompleteUI/MarginContainer/HBoxContainer/Button" to="CanvasLayer/LevelCompleteUI" method="_on_button_pressed"]

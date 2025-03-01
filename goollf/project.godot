@@ -32,6 +32,10 @@ window/stretch/mode="canvas_items"
 
 project/assembly_name="GOOLLF"
 
+[gui]
+
+theme/custom="res://Themes/default_ui_theme.tres"
+
 [input]
 
 key_up={

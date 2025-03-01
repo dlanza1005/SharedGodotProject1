@@ -4,12 +4,16 @@ class_name GravityGolfBall
 var gravityMultiplier: float = 30000
 var aimMultiplier: float = 120
 var resistance: float = 0.4
-var aiming: bool = true
+var aiming: bool = false
 var maxAimDistance: float = 150
 var stopBouncingThreshold: float = 5
 var angularVelocityMulOnBounce: float = 0.6
 
+var level_is_active: bool = false
+
 func _process(_delta) -> void:
+	if not level_is_active:
+		return
 	if aiming:
 		constant_force = Vector2(0, 0)
 		handleAim()
@@ -34,7 +38,7 @@ func drag() -> Vector2:
 	return -linear_velocity * resistance
 
 func _input(event) -> void:
-	if !aiming:
+	if not level_is_active or not aiming:
 		return
 	if event is InputEventMouseButton:
 		var clickPos = get_local_mouse_position() + position
@@ -43,6 +47,8 @@ func _input(event) -> void:
 		shoot(offset.normalized() * speed)
 
 func _on_body_entered(body: Node) -> void:
+	if not level_is_active:
+		return
 	var norm: Vector2 = (position - body.position).normalized()
 	var projection = linear_velocity.dot(norm) * norm
 	if projection.length_squared() < stopBouncingThreshold * stopBouncingThreshold:
@@ -70,3 +76,7 @@ func handleAim() -> void:
 	var mouseposition = get_local_mouse_position() + position
 	var offset = (mouseposition - position).limit_length(maxAimDistance)
 	aimer.position = offset + position
+
+func _on_gravity_golf_level_active() -> void:
+	level_is_active = true
+	beginAim()
