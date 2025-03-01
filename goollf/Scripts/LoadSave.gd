@@ -1,11 +1,11 @@
 extends Node
 
-# TODO: Meta save file for metadata about all the files
-# TODO: Multiple save file support
+# This script houses the technical internals for loading and saving data.
+# If you want to change the actual data that ghets loaded and saved,
+# Look to Scripts/SaveFile.gd instead
 
-## Gets the file path to use for the given save slot
-func get_file_path(slot: int) -> String:
-	return "user://save_slot_%s.save" % slot
+# TODO: Meta file for metadata about all the files
+# TODO: Multiple save file support
 
 ## Gets the maximum allowable number of save slots
 func get_max_saves() -> int:
@@ -22,6 +22,10 @@ func get_all_available_saves() -> Array[int]:
 		if save_file_exists(slot):
 			arr.push_back(slot)
 	return arr
+
+## Gets the file path to use for the given save slot
+func get_file_path(slot: int) -> String:
+	return "user://save_slot_%s.save" % slot
 
 ## Determines whether a save file exists in the given slot
 func save_file_exists(slot: int) -> bool:
