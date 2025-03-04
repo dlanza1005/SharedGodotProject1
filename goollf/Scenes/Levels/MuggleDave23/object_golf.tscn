@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cd1k2tf27cldt"]
+[gd_scene load_steps=23 format=3 uid="uid://cd1k2tf27cldt"]
 
 [ext_resource type="Script" path="res://Scenes/Levels/MuggleDave23/object_golf.gd" id="1_n2lxb"]
 [ext_resource type="Script" path="res://Scenes/Levels/MuggleDave23/cue.gd" id="2_3r0ma"]
@@ -7,6 +7,21 @@
 [ext_resource type="Texture2D" uid="uid://d3g2ar6e2e3xr" path="res://Images/Sprites/Shapes/shape1.png" id="4_b6ni5"]
 [ext_resource type="Texture2D" uid="uid://dvamb27awgfi3" path="res://Images/Sprites/Shapes/shape2.png" id="4_wcchq"]
 [ext_resource type="Texture2D" uid="uid://c3nukor3njm3e" path="res://Images/Sprites/Misc/Flag_Red.png" id="6_oyp7l"]
+
+[sub_resource type="Gradient" id="Gradient_6yyp3"]
+colors = PackedColorArray(0, 0.490196, 0, 1, 0, 0.490196, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_7sm5h"]
+gradient = SubResource("Gradient_6yyp3")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_myghd"]
+size = Vector2(960, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qeyj7"]
+size = Vector2(960, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s1w0x"]
+size = Vector2(20, 578.5)
 
 [sub_resource type="Gradient" id="Gradient_tl4hq"]
 colors = PackedColorArray(0.184156, 0.0871832, 0.00367153, 1, 0.301749, 0.229987, 0.149016, 1)
@@ -43,6 +58,31 @@ script = ExtResource("1_n2lxb")
 [node name="Table" type="Node2D" parent="."]
 position = Vector2(202, 344)
 
+[node name="Green" type="RigidBody2D" parent="Table"]
+mass = 100000.0
+gravity_scale = 0.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Table/Green"]
+position = Vector2(448, 1.49997)
+scale = Vector2(15, 9.04688)
+texture = SubResource("GradientTexture2D_7sm5h")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Table/Green"]
+position = Vector2(448, 301)
+shape = SubResource("RectangleShape2D_myghd")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Table/Green"]
+position = Vector2(448, -298)
+shape = SubResource("RectangleShape2D_qeyj7")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Table/Green"]
+position = Vector2(-42, 1.5)
+shape = SubResource("RectangleShape2D_s1w0x")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Table/Green"]
+position = Vector2(938, 1.75)
+shape = SubResource("RectangleShape2D_s1w0x")
+
 [node name="Cue" type="Node2D" parent="Table"]
 script = ExtResource("2_3r0ma")
 
@@ -68,7 +108,7 @@ texture = ExtResource("4_b6ni5")
 
 [node name="Shape2" type="RigidBody2D" parent="Table/Objects"]
 position = Vector2(325, 100)
-mass = 500.0
+mass = 100000.0
 physics_material_override = SubResource("PhysicsMaterial_33m5q")
 gravity_scale = 0.0
 
