@@ -1,4 +1,5 @@
 extends RigidBody2D
+class_name GravityGolfBall
 
 var gravityMultiplier = 20000
 var resistance = 0.4
