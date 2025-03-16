@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://biiaila5asspn"]
+[gd_scene load_steps=28 format=3 uid="uid://biiaila5asspn"]
 
 [ext_resource type="Script" path="res://Scripts/LevelController.gd" id="1_3ba4d"]
 [ext_resource type="Texture2D" uid="uid://b5ns0b8yy6dga" path="res://Images/Sprites/Balls/SuspiciouslyRoundAsteroid.png" id="1_52lu5"]
@@ -56,10 +56,16 @@ region = Rect2(1024, 1024, 256, 256)
 [sub_resource type="CircleShape2D" id="CircleShape2D_eujx5"]
 radius = 70.0
 
+[sub_resource type="InputEventKey" id="InputEventKey_6rgip"]
+keycode = 4194309
+
+[sub_resource type="Shortcut" id="Shortcut_n4cpa"]
+events = [SubResource("InputEventKey_6rgip")]
+
 [node name="GravityGolf" type="Node2D" node_paths=PackedStringArray("level_info_dialog", "level_complete_dialog")]
 script = ExtResource("1_3ba4d")
-level_info_dialog = NodePath("CanvasLayer/LevelInfoUI")
-level_complete_dialog = NodePath("CanvasLayer/LevelCompleteUI")
+level_info_dialog = NodePath("UI/LevelInfoUI")
+level_complete_dialog = NodePath("UI/LevelCompleteUI")
 
 [node name="Aimer" type="Sprite2D" parent="."]
 visible = false
@@ -145,9 +151,11 @@ script = ExtResource("10_6sxqm")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Flag/Area2D"]
 shape = SubResource("CircleShape2D_eujx5")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="UI" type="CanvasLayer" parent="."]
+process_mode = 3
 
-[node name="LevelInfoUI" type="PanelContainer" parent="CanvasLayer"]
+[node name="LevelInfoUI" type="PanelContainer" parent="UI"]
+visible = false
 custom_minimum_size = Vector2(500, 350)
 anchors_preset = 8
 anchor_left = 0.5
@@ -163,41 +171,40 @@ grow_vertical = 2
 theme = ExtResource("11_slmqg")
 script = ExtResource("12_64or1")
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/LevelInfoUI"]
+[node name="Container" type="MarginContainer" parent="UI/LevelInfoUI"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/LevelInfoUI/MarginContainer"]
+[node name="Content" type="VBoxContainer" parent="UI/LevelInfoUI/Container"]
 layout_mode = 2
 
-[node name="Header" type="RichTextLabel" parent="CanvasLayer/LevelInfoUI/MarginContainer/VBoxContainer"]
+[node name="Header" type="RichTextLabel" parent="UI/LevelInfoUI/Container/Content"]
 layout_mode = 2
 theme_type_variation = &"HeaderLarge"
 bbcode_enabled = true
 text = "[center]Gravity Golf"
 fit_content = true
 
-[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/LevelInfoUI/MarginContainer/VBoxContainer"]
+[node name="Description" type="RichTextLabel" parent="UI/LevelInfoUI/Container/Content"]
 layout_mode = 2
 bbcode_enabled = true
 text = "[center]Get the ball to the flag!"
 fit_content = true
 shortcut_keys_enabled = false
 
-[node name="Buttons" type="HBoxContainer" parent="CanvasLayer/LevelInfoUI/MarginContainer"]
+[node name="Buttons" type="HBoxContainer" parent="UI/LevelInfoUI/Container"]
 layout_direction = 2
 layout_mode = 2
 size_flags_vertical = 8
 alignment = 1
 
-[node name="Button" type="Button" parent="CanvasLayer/LevelInfoUI/MarginContainer/Buttons"]
+[node name="Begin" type="Button" parent="UI/LevelInfoUI/Container/Buttons"]
 custom_minimum_size = Vector2(120, 32)
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
 text = "Begin!"
 
-[node name="LevelCompleteUI" type="PanelContainer" parent="CanvasLayer"]
-visible = false
+[node name="LevelCompleteUI" type="PanelContainer" parent="UI" node_paths=PackedStringArray("continue_button")]
 custom_minimum_size = Vector2(500, 350)
 anchors_preset = 8
 anchor_left = 0.5
@@ -212,14 +219,15 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("11_slmqg")
 script = ExtResource("13_syqnb")
+continue_button = NodePath("Container/Buttons/Continue")
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/LevelCompleteUI"]
+[node name="Container" type="MarginContainer" parent="UI/LevelCompleteUI"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/LevelCompleteUI/MarginContainer"]
+[node name="Content" type="VBoxContainer" parent="UI/LevelCompleteUI/Container"]
 layout_mode = 2
 
-[node name="Header" type="RichTextLabel" parent="CanvasLayer/LevelCompleteUI/MarginContainer/VBoxContainer"]
+[node name="Header" type="RichTextLabel" parent="UI/LevelCompleteUI/Container/Content"]
 layout_mode = 2
 theme_type_variation = &"HeaderLarge"
 bbcode_enabled = true
@@ -227,46 +235,47 @@ text = "[center]Level complete!"
 fit_content = true
 autowrap_mode = 0
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="CanvasLayer/LevelCompleteUI/MarginContainer/VBoxContainer"]
+[node name="Placeholder" type="RichTextLabel" parent="UI/LevelCompleteUI/Container/Content"]
 layout_mode = 2
 bbcode_enabled = true
 text = "[center]This will eventually display data about your score or whatever."
 fit_content = true
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/LevelCompleteUI/MarginContainer"]
+[node name="Buttons" type="HBoxContainer" parent="UI/LevelCompleteUI/Container"]
 layout_mode = 2
 size_flags_vertical = 8
 
-[node name="Button" type="Button" parent="CanvasLayer/LevelCompleteUI/MarginContainer/HBoxContainer"]
+[node name="Continue" type="Button" parent="UI/LevelCompleteUI/Container/Buttons"]
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
+shortcut = SubResource("Shortcut_n4cpa")
 text = "Continue"
 
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+[node name="Background" type="ParallaxBackground" parent="."]
 follow_viewport_enabled = true
 
-[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+[node name="ParallaxLayer" type="ParallaxLayer" parent="Background"]
 motion_scale = Vector2(-0.35, -0.35)
 motion_mirroring = Vector2(2048, 1536)
 
-[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+[node name="Sprite2D" type="Sprite2D" parent="Background/ParallaxLayer"]
 texture = ExtResource("14_xfkj2")
 
-[node name="Sprite2D2" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+[node name="Sprite2D2" type="Sprite2D" parent="Background/ParallaxLayer"]
 position = Vector2(4096, 0)
 texture = ExtResource("14_xfkj2")
 
-[node name="Sprite2D3" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+[node name="Sprite2D3" type="Sprite2D" parent="Background/ParallaxLayer"]
 position = Vector2(0, 3072)
 texture = ExtResource("14_xfkj2")
 
-[node name="Sprite2D4" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+[node name="Sprite2D4" type="Sprite2D" parent="Background/ParallaxLayer"]
 position = Vector2(4096, 3072)
 texture = ExtResource("14_xfkj2")
 
 [connection signal="level_active" from="." to="Ball" method="_on_gravity_golf_level_active"]
 [connection signal="body_entered" from="Ball" to="Ball" method="_on_body_entered"]
 [connection signal="body_entered" from="Flag/Area2D" to="Flag" method="_on_area_2d_body_entered"]
-[connection signal="pressed" from="CanvasLayer/LevelInfoUI/MarginContainer/Buttons/Button" to="CanvasLayer/LevelInfoUI" method="_on_begin_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/LevelCompleteUI/MarginContainer/HBoxContainer/Button" to="CanvasLayer/LevelCompleteUI" method="_on_button_pressed"]
+[connection signal="pressed" from="UI/LevelInfoUI/Container/Buttons/Begin" to="UI/LevelInfoUI" method="_on_begin_button_pressed"]
+[connection signal="pressed" from="UI/LevelCompleteUI/Container/Buttons/Continue" to="UI/LevelCompleteUI" method="_on_okay_pressed"]
