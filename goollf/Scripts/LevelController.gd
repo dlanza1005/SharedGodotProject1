@@ -12,8 +12,6 @@ signal level_begin
 signal level_active
 ## This signal fires after the level is marked as complete, and before save data is saved
 signal level_complete
-## This signal fires when the level is about to be unregistered (unloaded)
-signal level_unload
 
 func _ready() -> void:
 	GameState.begin_level(self)
@@ -26,6 +24,3 @@ func fire_level_active():
 
 func fire_level_complete():
 	level_complete.emit()
-
-func fire_level_unload():
-	level_unload.emit()

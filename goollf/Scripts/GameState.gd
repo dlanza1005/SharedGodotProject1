@@ -16,9 +16,9 @@ var _level_controller: LevelController = null
 
 ## Call this when a level is loaded
 func begin_level(controller: LevelController) -> void:
-	_level_state = LevelState.LevelIntro
 	_level_controller = controller
 	if _level_controller.level_info_dialog != null:
+		_set_level_state(LevelState.LevelIntro)
 		_level_controller.level_info_dialog.visibility_changed.connect(_on_level_info_visibility_changed)
 	else:
 		_set_level_state(LevelState.Active)
@@ -50,6 +50,11 @@ func unpause() -> bool:
 	tree.paused = false
 	return true
 
+func load_next_or_return() -> void:
+	# TODO go directly to the next level, if there is one
+	get_tree().paused = false
+	MainMenu.load_main_menu(self, MainMenu.MenuState.LevelSelect)
+
 # ========================================
 # private functions
 # ========================================
@@ -58,8 +63,13 @@ func unpause() -> bool:
 ## If we're in level intro state and the node was made not visible,
 ## change the state to Active.
 func _on_level_info_visibility_changed():
-	if _level_state == LevelState.LevelIntro && !_level_controller.level_info_dialog.visible:
+	if _level_state == LevelState.LevelIntro && !_level_controller.level_info_dialog.is_visible_in_tree():
 		_set_level_state(LevelState.Active)
+
+## Just a helper function to wrap the null check to simplify the code
+func _set_vis(node: Node, val: bool) -> void:
+	if node != null:
+		node.set_visible(val)
 
 ## Call this when level state changes
 ## This handles the bulk of the level state logic
@@ -68,18 +78,27 @@ func _set_level_state(new_state: LevelState) -> void:
 	var tree: SceneTree = get_tree()
 	if new_state == _level_state:
 		return
+	
+	if _level_state == LevelState.Initial:
+		# Initial state setup
+		_set_vis(_level_controller.level_info_dialog, false)
+		_set_vis(_level_controller.level_complete_dialog, false)
+	
 	if _level_state == LevelState.LevelIntro:
 		# Exited level intro
-		if _level_controller.level_info_dialog != null:
-			_level_controller.level_info_dialog.set_visible(false)
+		_set_vis(_level_controller.level_info_dialog, false)
+	
+	if new_state == LevelState.LevelIntro:
+		_set_vis(_level_controller.level_info_dialog, true)
+	
 	if new_state == LevelState.Active:
 		_level_controller.fire_level_active()
+	
 	if new_state == LevelState.LevelComplete:
-		if _level_controller.level_complete_dialog != null:
-			_level_controller.level_complete_dialog.set_visible(true)
+		_set_vis(_level_controller.level_complete_dialog, true)
 		tree.paused = _level_controller.pause_on_level_complete
 		_level_controller.fire_level_complete()
 		# TODO mark level complete in save data
 		SaveFile.save_current()
+	
 	_level_state = new_state
-	# TODO call _level_controller.fire_level_unload() somewhere

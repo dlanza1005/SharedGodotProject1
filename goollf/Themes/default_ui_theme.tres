@@ -5,3 +5,6 @@ MarginContainer/constants/margin_bottom = 8
 MarginContainer/constants/margin_left = 8
 MarginContainer/constants/margin_right = 8
 MarginContainer/constants/margin_top = 8
+Title/base_type = &"RichTextLabel"
+Title/font_sizes/normal_font_size = 126
+Title/fonts/normal_font = null
