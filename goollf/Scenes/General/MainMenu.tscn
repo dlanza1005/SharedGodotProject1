@@ -1,0 +1,165 @@
+[gd_scene load_steps=4 format=3 uid="uid://mbvcr624yn5e"]
+
+[ext_resource type="Texture2D" uid="uid://c5knxhf21q1lr" path="res://Images/Sprites/Background/Goollf_BG_01.png" id="1_uw4e8"]
+[ext_resource type="Script" path="res://Scenes/General/MainMenu.gd" id="2_mgcbw"]
+[ext_resource type="Theme" uid="uid://5i55sugc47mo" path="res://Themes/default_ui_theme.tres" id="2_wqm1j"]
+
+[node name="MainMenu" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MenuRoot" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("title", "menu", "settings", "credits", "fileSelect", "levelSelect")]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme = ExtResource("2_wqm1j")
+script = ExtResource("2_mgcbw")
+title = NodePath("Title")
+menu = NodePath("MainMenu")
+settings = NodePath("Settings")
+credits = NodePath("Credits")
+fileSelect = NodePath("FileSelect")
+levelSelect = NodePath("LevelSelect")
+
+[node name="Background" type="Control" parent="CanvasLayer/MenuRoot"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/MenuRoot/Background"]
+custom_minimum_size = Vector2(1280, 720)
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 731.429
+texture = ExtResource("1_uw4e8")
+expand_mode = 5
+stretch_mode = 6
+
+[node name="Panel" type="Panel" parent="CanvasLayer/MenuRoot/Background"]
+custom_minimum_size = Vector2(1280, 720)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Title" type="Control" parent="CanvasLayer/MenuRoot"]
+anchors_preset = 0
+offset_right = 1280.0
+offset_bottom = 720.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/MenuRoot/Title"]
+layout_mode = 0
+offset_right = 1279.0
+offset_bottom = 718.0
+theme_type_variation = &"Title"
+bbcode_enabled = true
+text = "[center]GOOLLF"
+fit_content = true
+visible_characters_behavior = 2
+
+[node name="MainMenu" type="Control" parent="CanvasLayer/MenuRoot"]
+anchors_preset = 0
+offset_left = 575.0
+offset_top = 296.0
+offset_right = 615.0
+offset_bottom = 336.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MenuRoot/MainMenu"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="NewGame" type="Button" parent="CanvasLayer/MenuRoot/MainMenu/VBoxContainer"]
+layout_mode = 2
+text = "New Game"
+
+[node name="LoadGame" type="Button" parent="CanvasLayer/MenuRoot/MainMenu/VBoxContainer"]
+layout_mode = 2
+text = "Load Game"
+
+[node name="Settings" type="Button" parent="CanvasLayer/MenuRoot/MainMenu/VBoxContainer"]
+layout_mode = 2
+text = "Settings"
+
+[node name="Credits" type="Button" parent="CanvasLayer/MenuRoot/MainMenu/VBoxContainer"]
+layout_mode = 2
+text = "Credits"
+
+[node name="Settings" type="Control" parent="CanvasLayer/MenuRoot"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="NotImplemented" type="RichTextLabel" parent="CanvasLayer/MenuRoot/Settings"]
+custom_minimum_size = Vector2(1280, 720)
+layout_mode = 0
+offset_top = 350.0
+offset_right = 1280.0
+offset_bottom = 1070.0
+theme_type_variation = &"Title"
+bbcode_enabled = true
+text = "[center]Not Implemented!"
+
+[node name="Credits" type="Control" parent="CanvasLayer/MenuRoot"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="NotImplemented" type="RichTextLabel" parent="CanvasLayer/MenuRoot/Credits"]
+custom_minimum_size = Vector2(1280, 720)
+layout_mode = 0
+offset_top = 350.0
+offset_right = 1280.0
+offset_bottom = 1070.0
+theme_type_variation = &"Title"
+bbcode_enabled = true
+text = "[center]Not Implemented!"
+
+[node name="FileSelect" type="Control" parent="CanvasLayer/MenuRoot"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="NotImplemented" type="RichTextLabel" parent="CanvasLayer/MenuRoot/FileSelect"]
+custom_minimum_size = Vector2(1280, 720)
+layout_mode = 0
+offset_top = 350.0
+offset_right = 1280.0
+offset_bottom = 1070.0
+theme_type_variation = &"Title"
+bbcode_enabled = true
+text = "[center]Not Implemented!"
+
+[node name="LevelSelect" type="Control" parent="CanvasLayer/MenuRoot"]
+anchors_preset = 0
+offset_left = 812.0
+offset_top = 295.0
+offset_right = 852.0
+offset_bottom = 335.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MenuRoot/LevelSelect"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="GravityGolf" type="Button" parent="CanvasLayer/MenuRoot/LevelSelect/VBoxContainer"]
+layout_mode = 2
+text = "Gravity Golf!"
+
+[node name="ObjectGolf" type="Button" parent="CanvasLayer/MenuRoot/LevelSelect/VBoxContainer"]
+layout_mode = 2
+text = "Object Golf!"
+
+[node name="Back" type="Button" parent="CanvasLayer/MenuRoot/LevelSelect/VBoxContainer"]
+layout_mode = 2
+text = "Back"
+
+[connection signal="pressed" from="CanvasLayer/MenuRoot/MainMenu/VBoxContainer/NewGame" to="CanvasLayer/MenuRoot" method="_on_new_game_pressed"]
+[connection signal="pressed" from="CanvasLayer/MenuRoot/MainMenu/VBoxContainer/LoadGame" to="CanvasLayer/MenuRoot" method="_on_load_game_pressed"]
+[connection signal="pressed" from="CanvasLayer/MenuRoot/MainMenu/VBoxContainer/Settings" to="CanvasLayer/MenuRoot" method="_on_settings_pressed"]
+[connection signal="pressed" from="CanvasLayer/MenuRoot/MainMenu/VBoxContainer/Credits" to="CanvasLayer/MenuRoot" method="_on_credits_pressed"]
+[connection signal="pressed" from="CanvasLayer/MenuRoot/LevelSelect/VBoxContainer/GravityGolf" to="CanvasLayer/MenuRoot" method="_on_level_selected" binds= ["gravity_golf"]]
+[connection signal="pressed" from="CanvasLayer/MenuRoot/LevelSelect/VBoxContainer/ObjectGolf" to="CanvasLayer/MenuRoot" method="_on_level_selected" binds= ["object_golf"]]
+[connection signal="pressed" from="CanvasLayer/MenuRoot/LevelSelect/VBoxContainer/Back" to="CanvasLayer/MenuRoot" method="_on_return_to_main_menu"]
