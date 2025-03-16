@@ -91,43 +91,45 @@ position = Vector2(-103, -8.58307e-06)
 scale = Vector2(2.40625, 0.15625)
 texture = SubResource("GradientTexture2D_avkq5")
 
-[node name="Objects" type="Node2D" parent="Table"]
+[node name="Objects" type="Node2D" parent="Table/Cue/Sprite2D"]
+position = Vector2(42.8052, 0)
+scale = Vector2(0.415584, 6.4)
 
-[node name="Shape1" type="RigidBody2D" parent="Table/Objects"]
+[node name="Shape1" type="RigidBody2D" parent="Table/Cue/Sprite2D/Objects"]
 position = Vector2(-500, 100)
 mass = 500.0
 physics_material_override = SubResource("PhysicsMaterial_33m5q")
 gravity_scale = 0.0
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Table/Objects/Shape1"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Table/Cue/Sprite2D/Objects/Shape1"]
 scale = Vector2(0.25, 0.25)
 polygon = PackedVector2Array(186, -250, 250, -250, 250, 160, 250, 250, -250, 250, -250, 186, 186, 186)
 
-[node name="Sprite2D" type="Sprite2D" parent="Table/Objects/Shape1/CollisionPolygon2D"]
+[node name="Sprite2D" type="Sprite2D" parent="Table/Cue/Sprite2D/Objects/Shape1/CollisionPolygon2D"]
 texture = ExtResource("4_b6ni5")
 
-[node name="Shape2" type="RigidBody2D" parent="Table/Objects"]
+[node name="Shape2" type="RigidBody2D" parent="Table/Cue/Sprite2D/Objects"]
 position = Vector2(325, 100)
 mass = 100000.0
 physics_material_override = SubResource("PhysicsMaterial_33m5q")
 gravity_scale = 0.0
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Table/Objects/Shape2"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Table/Cue/Sprite2D/Objects/Shape2"]
 scale = Vector2(0.25, 0.25)
 polygon = PackedVector2Array(192, -250, 250, -250, 244, -168, 212, -60, 168, 24, 96, 112, 24, 164, -28, 200, -140, 236, -250, 250, -250, 192, -184, 188, -84, 160, -8, 120, 48, 76, 120, -4, 164, -96, 184, -160)
 
-[node name="Sprite2D" type="Sprite2D" parent="Table/Objects/Shape2/CollisionPolygon2D"]
+[node name="Sprite2D" type="Sprite2D" parent="Table/Cue/Sprite2D/Objects/Shape2/CollisionPolygon2D"]
 texture = ExtResource("4_wcchq")
 
-[node name="Ball" type="RigidBody2D" parent="Table/Objects" groups=["Ball"]]
+[node name="Ball" type="RigidBody2D" parent="Table/Cue/Sprite2D/Objects" groups=["Ball"]]
 position = Vector2(9.53674e-07, 0)
 physics_material_override = SubResource("PhysicsMaterial_uwkaj")
 gravity_scale = 0.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Table/Objects/Ball"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Table/Cue/Sprite2D/Objects/Ball"]
 shape = SubResource("CircleShape2D_rwbte")
 
-[node name="Sprite2D" type="Sprite2D" parent="Table/Objects/Ball"]
+[node name="Sprite2D" type="Sprite2D" parent="Table/Cue/Sprite2D/Objects/Ball"]
 position = Vector2(8.70228e-06, -8.58307e-06)
 scale = Vector2(0.06, 0.0600002)
 texture = ExtResource("3_an7u4")
