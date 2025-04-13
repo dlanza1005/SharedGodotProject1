@@ -92,45 +92,63 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="NotImplemented" type="RichTextLabel" parent="CanvasLayer/MenuRoot/Settings"]
-custom_minimum_size = Vector2(1280, 720)
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MenuRoot/Settings"]
 layout_mode = 0
-offset_top = 350.0
-offset_right = 1280.0
-offset_bottom = 1070.0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="NotImplemented" type="RichTextLabel" parent="CanvasLayer/MenuRoot/Settings/VBoxContainer"]
+custom_minimum_size = Vector2(1280, 400)
+layout_mode = 2
 theme_type_variation = &"Title"
 bbcode_enabled = true
 text = "[center]Not Implemented!"
+
+[node name="Back" type="Button" parent="CanvasLayer/MenuRoot/Settings/VBoxContainer"]
+layout_mode = 2
+text = "Back"
 
 [node name="Credits" type="Control" parent="CanvasLayer/MenuRoot"]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="NotImplemented" type="RichTextLabel" parent="CanvasLayer/MenuRoot/Credits"]
-custom_minimum_size = Vector2(1280, 720)
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MenuRoot/Credits"]
 layout_mode = 0
-offset_top = 350.0
-offset_right = 1280.0
-offset_bottom = 1070.0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="NotImplemented" type="RichTextLabel" parent="CanvasLayer/MenuRoot/Credits/VBoxContainer"]
+custom_minimum_size = Vector2(1280, 400)
+layout_mode = 2
 theme_type_variation = &"Title"
 bbcode_enabled = true
 text = "[center]Not Implemented!"
+
+[node name="Back" type="Button" parent="CanvasLayer/MenuRoot/Credits/VBoxContainer"]
+layout_mode = 2
+text = "Back"
 
 [node name="FileSelect" type="Control" parent="CanvasLayer/MenuRoot"]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="NotImplemented" type="RichTextLabel" parent="CanvasLayer/MenuRoot/FileSelect"]
-custom_minimum_size = Vector2(1280, 720)
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MenuRoot/FileSelect"]
 layout_mode = 0
-offset_top = 350.0
-offset_right = 1280.0
-offset_bottom = 1070.0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="NotImplemented" type="RichTextLabel" parent="CanvasLayer/MenuRoot/FileSelect/VBoxContainer"]
+custom_minimum_size = Vector2(1280, 400)
+layout_mode = 2
 theme_type_variation = &"Title"
 bbcode_enabled = true
 text = "[center]Not Implemented!"
+
+[node name="Back" type="Button" parent="CanvasLayer/MenuRoot/FileSelect/VBoxContainer"]
+layout_mode = 2
+text = "Back"
 
 [node name="LevelSelect" type="Control" parent="CanvasLayer/MenuRoot"]
 anchors_preset = 0
@@ -160,6 +178,9 @@ text = "Back"
 [connection signal="pressed" from="CanvasLayer/MenuRoot/MainMenu/VBoxContainer/LoadGame" to="CanvasLayer/MenuRoot" method="_on_load_game_pressed"]
 [connection signal="pressed" from="CanvasLayer/MenuRoot/MainMenu/VBoxContainer/Settings" to="CanvasLayer/MenuRoot" method="_on_settings_pressed"]
 [connection signal="pressed" from="CanvasLayer/MenuRoot/MainMenu/VBoxContainer/Credits" to="CanvasLayer/MenuRoot" method="_on_credits_pressed"]
+[connection signal="pressed" from="CanvasLayer/MenuRoot/Settings/VBoxContainer/Back" to="CanvasLayer/MenuRoot" method="_on_return_to_main_menu"]
+[connection signal="pressed" from="CanvasLayer/MenuRoot/Credits/VBoxContainer/Back" to="CanvasLayer/MenuRoot" method="_on_return_to_main_menu"]
+[connection signal="pressed" from="CanvasLayer/MenuRoot/FileSelect/VBoxContainer/Back" to="CanvasLayer/MenuRoot" method="_on_return_to_main_menu"]
 [connection signal="pressed" from="CanvasLayer/MenuRoot/LevelSelect/VBoxContainer/GravityGolf" to="CanvasLayer/MenuRoot" method="_on_level_selected" binds= ["gravity_golf"]]
 [connection signal="pressed" from="CanvasLayer/MenuRoot/LevelSelect/VBoxContainer/ObjectGolf" to="CanvasLayer/MenuRoot" method="_on_level_selected" binds= ["object_golf"]]
 [connection signal="pressed" from="CanvasLayer/MenuRoot/LevelSelect/VBoxContainer/Back" to="CanvasLayer/MenuRoot" method="_on_return_to_main_menu"]
