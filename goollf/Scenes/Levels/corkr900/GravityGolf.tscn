@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://biiaila5asspn"]
+[gd_scene load_steps=29 format=3 uid="uid://biiaila5asspn"]
 
 [ext_resource type="Script" path="res://Scripts/LevelController.gd" id="1_3ba4d"]
 [ext_resource type="Texture2D" uid="uid://b5ns0b8yy6dga" path="res://Images/Sprites/Balls/SuspiciouslyRoundAsteroid.png" id="1_52lu5"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://c3nukor3njm3e" path="res://Images/Sprites/Misc/Flag_Red.png" id="8_sj1ha"]
 [ext_resource type="Script" path="res://Scenes/Levels/corkr900/GravityGolfFlag.gd" id="10_6sxqm"]
 [ext_resource type="Theme" uid="uid://5i55sugc47mo" path="res://Themes/default_ui_theme.tres" id="11_slmqg"]
+[ext_resource type="PackedScene" uid="uid://cjc38cu045eap" path="res://Prefabs/CollectableStar.tscn" id="11_v0v6u"]
 [ext_resource type="Script" path="res://Scenes/Levels/corkr900/LevelInfo.gd" id="12_64or1"]
 [ext_resource type="Script" path="res://Scenes/Levels/corkr900/LevelComplete.gd" id="13_syqnb"]
 [ext_resource type="Texture2D" uid="uid://b02sr388mwi0b" path="res://Images/Sprites/Background/Starry.png" id="14_xfkj2"]
@@ -62,10 +63,8 @@ keycode = 4194309
 [sub_resource type="Shortcut" id="Shortcut_n4cpa"]
 events = [SubResource("InputEventKey_6rgip")]
 
-[node name="GravityGolf" type="Node2D" node_paths=PackedStringArray("level_info_dialog", "level_complete_dialog")]
+[node name="GravityGolf" type="Node2D"]
 script = ExtResource("1_3ba4d")
-level_info_dialog = NodePath("UI/LevelInfoUI")
-level_complete_dialog = NodePath("UI/LevelCompleteUI")
 
 [node name="Aimer" type="Sprite2D" parent="."]
 visible = false
@@ -76,6 +75,7 @@ texture = ExtResource("1_52lu5")
 process_mode = 1
 physics_interpolation_mode = 1
 position = Vector2(212, 447)
+collision_mask = 15
 gravity_scale = 0.0
 continuous_cd = 1
 contact_monitor = true
@@ -96,6 +96,7 @@ follow_node = NodePath("../Ball")
 
 [node name="Planet1" type="StaticBody2D" parent="."]
 position = Vector2(430, 142)
+collision_layer = 2
 script = ExtResource("3_kvqjq")
 mass = 4000
 
@@ -107,6 +108,7 @@ texture = SubResource("AtlasTexture_cblqc")
 
 [node name="Planet2" type="StaticBody2D" parent="."]
 position = Vector2(175, 520)
+collision_layer = 2
 script = ExtResource("3_kvqjq")
 mass = 1500
 
@@ -118,6 +120,7 @@ texture = SubResource("AtlasTexture_xu76p")
 
 [node name="Planet3" type="StaticBody2D" parent="."]
 position = Vector2(1369, 322)
+collision_layer = 2
 script = ExtResource("3_kvqjq")
 mass = 2000
 
@@ -129,6 +132,7 @@ texture = SubResource("AtlasTexture_unx27")
 
 [node name="Planet4" type="StaticBody2D" parent="."]
 position = Vector2(785, 506)
+collision_layer = 2
 script = ExtResource("3_kvqjq")
 mass = 2500
 
@@ -150,6 +154,9 @@ script = ExtResource("10_6sxqm")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Flag/Area2D"]
 shape = SubResource("CircleShape2D_eujx5")
+
+[node name="CollectableStarGold" parent="." instance=ExtResource("11_v0v6u")]
+position = Vector2(381, 421)
 
 [node name="UI" type="CanvasLayer" parent="."]
 process_mode = 3
@@ -205,6 +212,7 @@ size_flags_vertical = 4
 text = "Begin!"
 
 [node name="LevelCompleteUI" type="PanelContainer" parent="UI" node_paths=PackedStringArray("continue_button")]
+visible = false
 custom_minimum_size = Vector2(500, 350)
 anchors_preset = 8
 anchor_left = 0.5

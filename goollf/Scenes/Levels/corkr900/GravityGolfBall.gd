@@ -49,6 +49,9 @@ func _input(event) -> void:
 func _on_body_entered(body: Node) -> void:
 	if not level_is_active:
 		return
+	if (body is CollectableStar):
+		body.collect()
+		# TODO hande star collection
 	var norm: Vector2 = (position - body.position).normalized()
 	var projection = linear_velocity.dot(norm) * norm
 	if projection.length_squared() < stopBouncingThreshold * stopBouncingThreshold:
